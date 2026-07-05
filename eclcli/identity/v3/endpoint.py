@@ -15,7 +15,6 @@
 
 """Identity v3 Endpoint action implementations"""
 
-import six
 import sys
 
 from eclcli.common import command
@@ -89,7 +88,7 @@ class CreateEndpoint(command.ShowOne):
         info.update(endpoint._info)
         info['service_name'] = get_service_name(service)
         info['service_type'] = service.type
-        return zip(*sorted(six.iteritems(info)))
+        return zip(*sorted(info.items()))
 
 
 class DeleteEndpoint(command.Command):
@@ -260,4 +259,4 @@ class ShowEndpoint(command.ShowOne):
         info.update(endpoint._info)
         info['service_name'] = get_service_name(service)
         info['service_type'] = service.type
-        return zip(*sorted(six.iteritems(info)))
+        return zip(*sorted(info.items()))

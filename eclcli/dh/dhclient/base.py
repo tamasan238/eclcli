@@ -13,7 +13,6 @@ try:
 except ImportError:
     from inspect import getargspec as get_args
 
-import six
 
 from . import exceptions
 from .common.apiclient import base
@@ -170,8 +169,7 @@ class Manager(base.HookableMixin):
                 return self.resource_class(self, body)
 
 
-@six.add_metaclass(abc.ABCMeta)
-class ManagerWithFind(Manager):
+class ManagerWithFind(Manager, metaclass=abc.ABCMeta):
     """
     Like a `Manager`, but with additional `find()`/`findall()` methods.
     """
@@ -259,7 +257,7 @@ class BootingManagerWithFind(ManagerWithFind):
     def _parse_block_device_mapping(self, block_device_mapping):
         bdm = []
 
-        for device_name, mapping in six.iteritems(block_device_mapping):
+        for device_name, mapping in block_device_mapping.items():
             #
             # The mapping is in the format:
             # <id>:[<type>]:[<size(GB)>]:[<delete_on_terminate>]

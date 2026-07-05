@@ -16,7 +16,6 @@
 """Identity v3 User action implementations"""
 
 import copy
-import six
 import sys
 
 from keystoneauth1 import exceptions as ks_exc
@@ -127,7 +126,7 @@ class CreateUser(command.ShowOne):
                 raise e
 
         user._info.pop('links')
-        return zip(*sorted(six.iteritems(user._info)))
+        return zip(*sorted(user._info.items()))
 
 
 class DeleteUser(command.Command):
@@ -449,4 +448,4 @@ class ShowUser(command.ShowOne):
                                        parsed_args.user)
 
         user._info.pop('links')
-        return zip(*sorted(six.iteritems(user._info)))
+        return zip(*sorted(user._info.items()))

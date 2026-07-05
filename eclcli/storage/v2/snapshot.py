@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import copy
-import six
 from eclcli.common import command
 from eclcli.common import utils
 from eclcli.i18n import _  # noqa

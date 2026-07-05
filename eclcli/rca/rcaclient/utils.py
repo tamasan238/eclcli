@@ -28,7 +28,6 @@ except ImportError:
 
 import pkg_resources
 import prettytable
-import six
 
 from . import exceptions
 from .i18n import _
@@ -111,8 +110,7 @@ def print_list(objs, fields, formatters={}, sortby_index=None):
     else:
         result = encodeutils.safe_encode(pt.get_string())
 
-    if six.PY3:
-        result = result.decode()
+    result = result.decode()
 
     print(result)
 
@@ -125,7 +123,7 @@ def _flatten(data, prefix=None):
 
     """
     if isinstance(data, dict):
-        for key, value in six.iteritems(data):
+        for key, value in data.items():
             new_key = '%s_%s' % (prefix, key) if prefix else key
             if isinstance(value, (dict, list)):
                 for item in _flatten(value, new_key):
@@ -148,8 +146,8 @@ def flatten_dict(data):
     """
     data = data.copy()
     # Try and decode any nested JSON structures.
-    for key, value in six.iteritems(data):
-        if isinstance(value, six.string_types):
+    for key, value in data.items():
+        if isinstance(value, str):
             try:
                 data[key] = json.loads(value)
             except ValueError:
@@ -169,7 +167,7 @@ def print_dict(d, dict_property="Property", dict_value="Value", wrap=0):
             v = textwrap.fill(str(v), wrap)
         # if value has a newline, add in multiple rows
         # e.g. fault with stacktrace
-        if v and isinstance(v, six.string_types) and r'\n' in v:
+        if v and isinstance(v, str) and r'\n' in v:
             lines = v.strip().split(r'\n')
             col1 = k
             for line in lines:
@@ -182,8 +180,7 @@ def print_dict(d, dict_property="Property", dict_value="Value", wrap=0):
 
     result = encodeutils.safe_encode(pt.get_string())
 
-    if six.PY3:
-        result = result.decode()
+    result = result.decode()
 
     print(result)
 
@@ -207,8 +204,7 @@ def find_resource(manager, name_or_id, **find_args):
     try:
         tmp_id = encodeutils.safe_encode(name_or_id)
 
-        if six.PY3:
-            tmp_id = tmp_id.decode()
+        tmp_id = tmp_id.decode()
 
         uuid.UUID(tmp_id)
         return manager.get(tmp_id)

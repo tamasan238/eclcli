@@ -2,7 +2,6 @@ from eclcli.common import command
 from eclcli.bare import bare_utils
 from eclcli.common import utils
 
-import six
 
 
 class ShowLimit(command.ShowOne):
@@ -17,4 +16,4 @@ class ShowLimit(command.ShowOne):
         data = bare_client.limits.get()
         _info = bare_utils._tidy_data_info(data._info)
 
-        return zip(*sorted(six.iteritems(_info)))
+        return zip(*sorted(_info.items()))

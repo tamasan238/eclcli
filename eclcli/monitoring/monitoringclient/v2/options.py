@@ -13,7 +13,9 @@
 
 import re
 from ... import monitoring_utils
-from six.moves import urllib
+import urllib.parse
+import urllib.request
+import urllib.error
 
 OP_LOOKUP = {'!=': 'ne',
              '>=': 'ge',

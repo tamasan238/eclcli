@@ -31,8 +31,6 @@ try:
 except ImportError:
     from oslo.utils import strutils
 
-import six
-from six import moves
 
 from .. import utils
 from .. import exc
@@ -47,7 +45,7 @@ STATISTICS = ['max', 'min', 'avg', 'sum', 'count']
 GNOCCHI_AGGREGATION = ['last', 'min', 'median', 'sum',
                        'std', 'first', 'mean', 'count',
                        'moving-average', 'max']
-GNOCCHI_AGGREGATION.extend(['%spct' % num for num in moves.xrange(1, 100)])
+GNOCCHI_AGGREGATION.extend(['%spct' % num for num in range(1, 100)])
 
 AGGREGATES = {'avg': 'Avg',
               'count': 'Count',
@@ -338,7 +336,7 @@ def _display_rule(type, rule):
     else:
         # just dump all
         return "\n".join(["%s: %s" % (f, v)
-                          for f, v in six.iteritems(rule)])
+                          for f, v in rule.items()])
 
 
 def alarm_rule_formatter(alarm):
@@ -393,7 +391,7 @@ def alarm_change_detail_formatter(change):
                           _display_time_constraints_brief(
                               detail['time_constraints']))
     elif change.type == 'rule change':
-        for k, v in six.iteritems(detail):
+        for k, v in detail.items():
             if k == 'rule':
                 fields.append('rule: %s' % _display_rule(_infer_type(detail),
                                                          v))

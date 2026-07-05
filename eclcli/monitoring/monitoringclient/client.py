@@ -20,7 +20,7 @@ from keystoneauth1.identity import v2 as v2_auth
 from keystoneauth1.identity import v3 as v3_auth
 from keystoneauth1 import session
 from oslo_utils import strutils
-import six.moves.urllib.parse as urlparse
+import urllib.parse as urlparse
 
 from . import utils
 from . import exc

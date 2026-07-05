@@ -15,7 +15,6 @@
 
 """Identity v3 Role action implementations"""
 
-import six
 import sys
 
 from keystoneauth1 import exceptions as ks_exc
@@ -170,7 +169,7 @@ class CreateRole(command.ShowOne):
                 raise e
 
         role._info.pop('links')
-        return zip(*sorted(six.iteritems(role._info)))
+        return zip(*sorted(role._info.items()))
 
 
 class DeleteRole(command.Command):
@@ -387,4 +386,4 @@ class ShowRole(command.ShowOne):
         )
 
         role._info.pop('links')
-        return zip(*sorted(six.iteritems(role._info)))
+        return zip(*sorted(role._info.items()))

@@ -14,7 +14,6 @@
 
 """Volume v2 Type action implementations"""
 
-import six
 
 from eclcli.common import command
 from eclcli.common import parseractions
@@ -80,7 +79,7 @@ class CreateVolumeType(command.ShowOne):
             result = volume_type.set_keys(parsed_args.property)
             volume_type._info.update({'properties': utils.format_dict(result)})
 
-        return zip(*sorted(six.iteritems(volume_type._info)))
+        return zip(*sorted(volume_type._info.items()))
 
 
 class DeleteVolumeType(command.Command):
@@ -203,7 +202,7 @@ class ShowVolumeType(command.ShowOne):
             volume_client.volume_types, parsed_args.volume_type)
         properties = utils.format_dict(volume_type._info.pop('extra_specs'))
         volume_type._info.update({'properties': properties})
-        return zip(*sorted(six.iteritems(volume_type._info)))
+        return zip(*sorted(volume_type._info.items()))
 
 
 class UnsetVolumeType(command.Command):

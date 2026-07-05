@@ -15,7 +15,6 @@
 
 """Identity v3 Domain action implementations"""
 
-import six
 import sys
 
 from keystoneauth1 import exceptions as ks_exc
@@ -80,7 +79,7 @@ class CreateDomain(command.ShowOne):
                 raise e
 
         domain._info.pop('links')
-        return zip(*sorted(six.iteritems(domain._info)))
+        return zip(*sorted(domain._info.items()))
 
 
 class DeleteDomain(command.Command):
@@ -187,4 +186,4 @@ class ShowDomain(command.ShowOne):
                                      parsed_args.domain)
 
         domain._info.pop('links')
-        return zip(*sorted(six.iteritems(domain._info)))
+        return zip(*sorted(domain._info.items()))

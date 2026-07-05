@@ -16,7 +16,6 @@
 
 import copy
 
-import six
 
 from eclcli.common import command
 from eclcli.common import parseractions
@@ -66,7 +65,7 @@ class CreateSnapshot(command.ShowOne):
         snapshot._info.update(
             {'properties': utils.format_dict(snapshot._info.pop('metadata'))}
         )
-        return zip(*sorted(six.iteritems(snapshot._info)))
+        return zip(*sorted(snapshot._info.items()))
 
 
 class DeleteSnapshot(command.Command):
@@ -222,7 +221,7 @@ class ShowSnapshot(command.ShowOne):
         snapshot._info.update(
             {'properties': utils.format_dict(snapshot._info.pop('metadata'))}
         )
-        return zip(*sorted(six.iteritems(snapshot._info)))
+        return zip(*sorted(snapshot._info.items()))
 
 
 class UnsetSnapshot(command.Command):

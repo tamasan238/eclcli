@@ -1,6 +1,5 @@
 import copy
 
-import six
 
 from eclcli.common import command
 from eclcli.common import utils
@@ -69,4 +68,4 @@ class ShowVolumeType(command.ShowOne):
             printout = {"message": clientexp.message,
                         "details": clientexp.details,
                         "code": clientexp.code}
-        return zip(*sorted(six.iteritems(printout)))
+        return zip(*sorted(printout.items()))

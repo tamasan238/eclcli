@@ -15,7 +15,6 @@
 
 """Group action implementations"""
 
-import six
 import sys
 
 from keystoneauth1 import exceptions as ks_exc
@@ -154,7 +153,7 @@ class CreateGroup(command.ShowOne):
                 raise e
 
         group._info.pop('links')
-        return zip(*sorted(six.iteritems(group._info)))
+        return zip(*sorted(group._info.items()))
 
 
 class DeleteGroup(command.Command):
@@ -348,4 +347,4 @@ class ShowGroup(command.ShowOne):
                                   domain_name_or_id=parsed_args.domain)
 
         group._info.pop('links')
-        return zip(*sorted(six.iteritems(group._info)))
+        return zip(*sorted(group._info.items()))

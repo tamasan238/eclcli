@@ -14,7 +14,6 @@
 
 """Identity v3 Protocols actions implementations"""
 
-import six
 
 from eclcli.common import command
 from eclcli.common import utils
@@ -58,7 +57,7 @@ class CreateProtocol(command.ShowOne):
         info['identity_provider'] = parsed_args.identity_provider
         info['mapping'] = info.pop('mapping_id')
         info.pop('links', None)
-        return zip(*sorted(six.iteritems(info)))
+        return zip(*sorted(info.items()))
 
 
 class DeleteProtocol(command.Command):
@@ -148,7 +147,7 @@ class SetProtocol(command.Command):
         # user.
         info['identity_provider'] = parsed_args.identity_provider
         info['mapping'] = info.pop('mapping_id')
-        return zip(*sorted(six.iteritems(info)))
+        return zip(*sorted(info.items()))
 
 
 class ShowProtocol(command.ShowOne):
@@ -176,4 +175,4 @@ class ShowProtocol(command.ShowOne):
         info = dict(protocol._info)
         info['mapping'] = info.pop('mapping_id')
         info.pop('links', None)
-        return zip(*sorted(six.iteritems(info)))
+        return zip(*sorted(info.items()))

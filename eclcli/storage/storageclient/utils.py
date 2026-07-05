@@ -6,7 +6,6 @@ import uuid
 
 import pkg_resources
 import prettytable
-import six
 
 from . import exceptions
 from .common import strutils
@@ -139,7 +138,7 @@ def print_list(objs, fields, formatters=None, sortby_index=0):
 def print_dict(d, property="Property"):
     pt = prettytable.PrettyTable([property, 'Value'], caching=False)
     pt.aligns = ['l', 'l']
-    [pt.add_row(list(r)) for r in six.iteritems(d)]
+    [pt.add_row(list(r)) for r in d.items()]
     _print(pt, property)
 
 

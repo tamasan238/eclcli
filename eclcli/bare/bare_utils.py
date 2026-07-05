@@ -4,7 +4,6 @@ try:
 except ImportError:
     import simplejson as json
 
-import six
 
 
 def _format_zone_state(state):
@@ -295,7 +294,7 @@ def _format_raid_arrays(raid_arrays):
                 if type(raid_arrays[_keyName]) == list:
                     # print type(raid_arrays[_keyName][0])
                     if type(raid_arrays[_keyName][0]) == str or type(
-                            raid_arrays[_keyName][0]) == six.text_type:
+                            raid_arrays[_keyName][0]) == str:
                         tempStr = "["
                         for elem in raid_arrays[_keyName]:
                             tempStr += str(elem) + ', '

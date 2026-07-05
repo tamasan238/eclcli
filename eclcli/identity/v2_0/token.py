@@ -15,7 +15,6 @@
 
 """Identity v2 Token action implementations"""
 
-import six
 
 from eclcli.common import command
 from eclcli.i18n import _  # noqa
@@ -36,7 +35,7 @@ class IssueToken(command.ShowOne):
         token = self.app.client_manager.auth_ref.service_catalog.get_token()
         if 'tenant_id' in token:
             token['project_id'] = token.pop('tenant_id')
-        return zip(*sorted(six.iteritems(token)))
+        return zip(*sorted(token.items()))
 
 
 class RevokeToken(command.Command):

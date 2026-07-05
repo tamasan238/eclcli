@@ -14,7 +14,6 @@
 
 """Hypervisor Stats action implementations"""
 
-import six
 
 from eclcli.common import command
 
@@ -26,4 +25,4 @@ class ShowHypervisorStats(command.ShowOne):
         compute_client = self.app.client_manager.compute
         hypervisor_stats = compute_client.hypervisors.statistics().to_dict()
 
-        return zip(*sorted(six.iteritems(hypervisor_stats)))
+        return zip(*sorted(hypervisor_stats.items()))

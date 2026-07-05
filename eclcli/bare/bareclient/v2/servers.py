@@ -32,8 +32,7 @@ try:
 except ImportError:
     from oslo.utils import encodeutils
 
-import six
-from six.moves.urllib import parse
+from urllib import parse
 
 from .. import base
 from .. import crypto
@@ -456,10 +455,7 @@ class ServerManager(base.BootingManagerWithFind):
                 with open(userdata, "r") as fuserdata:
                     userdata = fuserdata.read()
 
-            if six.PY3:
-                userdata = userdata.encode("utf-8")
-            else:
-                userdata = encodeutils.safe_encode(userdata)
+            userdata = userdata.encode("utf-8")
 
             userdata_b64 = base64.b64encode(userdata).decode('utf-8')
             body["server"]["user_data"] = userdata_b64
@@ -499,7 +495,7 @@ class ServerManager(base.BootingManagerWithFind):
                 else:
                     data = file_or_string
 
-                if six.PY3 and isinstance(data, str):
+                if isinstance(data, str):
                     data = data.encode('utf-8')
                 cont = base64.b64encode(data).decode('utf-8')
                 personality.append({
@@ -578,7 +574,7 @@ class ServerManager(base.BootingManagerWithFind):
 
         qparams = {}
 
-        for opt, val in six.iteritems(search_opts):
+        for opt, val in search_opts.items():
             if val:
                 qparams[opt] = val
 

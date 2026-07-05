@@ -18,7 +18,6 @@ from eclcli.common import utils
 from eclcli.common import exceptions
 from eclcli.i18n import _  # noqa
 from .. import monitoring_utils
-import six
 
 
 class CreateAlarm(command.ShowOne):
@@ -183,7 +182,7 @@ class CreateAlarm(command.ShowOne):
                     "details": cli_exp.details,
                     "code": cli_exp.code}
 
-        return zip(*sorted(six.iteritems(info)))
+        return zip(*sorted(info.items()))
 
 
 class UpdateAlarm(command.ShowOne):
@@ -339,7 +338,7 @@ class UpdateAlarm(command.ShowOne):
             query=query,
         )
         info = monitoring_utils._tidy_data_info(data._info)
-        return zip(*sorted(six.iteritems(info)))
+        return zip(*sorted(info.items()))
 
 
 class DeleteAlarm(command.Command):

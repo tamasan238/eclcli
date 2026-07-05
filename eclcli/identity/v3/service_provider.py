@@ -13,7 +13,6 @@
 
 """Service Provider action implementations"""
 
-import six
 import sys
 
 from eclcli.common import command
@@ -77,7 +76,7 @@ class CreateServiceProvider(command.ShowOne):
             sp_url=parsed_args.service_provider_url)
 
         sp._info.pop('links', None)
-        return zip(*sorted(six.iteritems(sp._info)))
+        return zip(*sorted(sp._info.items()))
 
 
 class DeleteServiceProvider(command.Command):
@@ -173,7 +172,7 @@ class SetServiceProvider(command.Command):
             description=parsed_args.description,
             auth_url=parsed_args.auth_url,
             sp_url=parsed_args.service_provider_url)
-        return zip(*sorted(six.iteritems(service_provider._info)))
+        return zip(*sorted(service_provider._info.items()))
 
 
 class ShowServiceProvider(command.ShowOne):
@@ -195,4 +194,4 @@ class ShowServiceProvider(command.ShowOne):
             parsed_args.service_provider)
 
         service_provider._info.pop('links', None)
-        return zip(*sorted(six.iteritems(service_provider._info)))
+        return zip(*sorted(service_provider._info.items()))

@@ -12,13 +12,11 @@
 #
 
 import abc
-import six
 
 from eclcli.common import command
 
 
-@six.add_metaclass(abc.ABCMeta)
-class NetworkAndComputeCommand(command.Command):
+class NetworkAndComputeCommand(command.Command, metaclass=abc.ABCMeta):
     """Network and Compute Command
 
     Command class for commands that support implementation via
@@ -68,8 +66,7 @@ class NetworkAndComputeCommand(command.Command):
         pass
 
 
-@six.add_metaclass(abc.ABCMeta)
-class NetworkAndComputeLister(command.Lister):
+class NetworkAndComputeLister(command.Lister, metaclass=abc.ABCMeta):
     """Network and Compute Lister
 
     Lister class for commands that support implementation via
@@ -119,8 +116,7 @@ class NetworkAndComputeLister(command.Lister):
         pass
 
 
-@six.add_metaclass(abc.ABCMeta)
-class NetworkAndComputeShowOne(command.ShowOne):
+class NetworkAndComputeShowOne(command.ShowOne, metaclass=abc.ABCMeta):
     """Network and Compute ShowOne
 
     ShowOne class for commands that support implementation via

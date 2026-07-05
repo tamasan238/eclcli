@@ -14,7 +14,6 @@
 """Identity v3 Trust action implementations"""
 
 import datetime
-import six
 
 from eclcli.common import command
 from eclcli.common import utils
@@ -125,7 +124,7 @@ class CreateTrust(command.ShowOne):
         msg = ' '.join(r['name'] for r in roles)
         trust._info['roles'] = msg
 
-        return zip(*sorted(six.iteritems(trust._info)))
+        return zip(*sorted(trust._info.items()))
 
 
 class DeleteTrust(command.Command):
@@ -187,4 +186,4 @@ class ShowTrust(command.ShowOne):
         msg = ' '.join(r['name'] for r in roles)
         trust._info['roles'] = msg
 
-        return zip(*sorted(six.iteritems(trust._info)))
+        return zip(*sorted(trust._info.items()))

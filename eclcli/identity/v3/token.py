@@ -15,7 +15,6 @@
 
 """Identity v3 Token action implementations"""
 
-import six
 
 from eclcli.common import command
 from eclcli.common import utils
@@ -60,7 +59,7 @@ class AuthorizeRequestToken(command.ShowOne):
             parsed_args.request_key,
             roles)
 
-        return zip(*sorted(six.iteritems(verifier_pin._info)))
+        return zip(*sorted(verifier_pin._info.items()))
 
 
 class CreateAccessToken(command.ShowOne):
@@ -106,7 +105,7 @@ class CreateAccessToken(command.ShowOne):
             parsed_args.consumer_key, parsed_args.consumer_secret,
             parsed_args.request_key, parsed_args.request_secret,
             parsed_args.verifier)
-        return zip(*sorted(six.iteritems(access_token._info)))
+        return zip(*sorted(access_token._info.items()))
 
 
 class CreateRequestToken(command.ShowOne):
@@ -158,7 +157,7 @@ class CreateRequestToken(command.ShowOne):
             parsed_args.consumer_key,
             parsed_args.consumer_secret,
             project.id)
-        return zip(*sorted(six.iteritems(request_token._info)))
+        return zip(*sorted(request_token._info.items()))
 
 
 class IssueToken(command.ShowOne):
@@ -175,7 +174,7 @@ class IssueToken(command.ShowOne):
         token = self.app.client_manager.auth_ref.service_catalog.get_token()
         if 'tenant_id' in token:
             token['project_id'] = token.pop('tenant_id')
-        return zip(*sorted(six.iteritems(token)))
+        return zip(*sorted(token.items()))
 
 
 class RevokeToken(command.Command):

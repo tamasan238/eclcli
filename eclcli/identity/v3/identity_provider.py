@@ -13,7 +13,6 @@
 
 """Identity v3 IdentityProvider action implementations"""
 
-import six
 
 from eclcli.common import command
 from eclcli.common import utils
@@ -83,7 +82,7 @@ class CreateIdentityProvider(command.ShowOne):
         idp._info.pop('links', None)
         remote_ids = utils.format_list(idp._info.pop('remote_ids', []))
         idp._info['remote_ids'] = remote_ids
-        return zip(*sorted(six.iteritems(idp._info)))
+        return zip(*sorted(idp._info.items()))
 
 
 class DeleteIdentityProvider(command.Command):
@@ -195,7 +194,7 @@ class SetIdentityProvider(command.Command):
             parsed_args.identity_provider, **kwargs)
 
         identity_provider._info.pop('links', None)
-        return zip(*sorted(six.iteritems(identity_provider._info)))
+        return zip(*sorted(identity_provider._info.items()))
 
 
 class ShowIdentityProvider(command.ShowOne):
@@ -219,4 +218,4 @@ class ShowIdentityProvider(command.ShowOne):
         idp._info.pop('links', None)
         remote_ids = utils.format_list(idp._info.pop('remote_ids', []))
         idp._info['remote_ids'] = remote_ids
-        return zip(*sorted(six.iteritems(idp._info)))
+        return zip(*sorted(idp._info.items()))

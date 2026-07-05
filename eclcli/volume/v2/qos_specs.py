@@ -15,7 +15,6 @@
 
 """Volume v2 QoS action implementations"""
 
-import six
 
 from eclcli.common import command
 from eclcli.common import parseractions
@@ -87,7 +86,7 @@ class CreateQos(command.ShowOne):
 
         qos_spec = volume_client.qos_specs.create(parsed_args.name, specs)
 
-        return zip(*sorted(six.iteritems(qos_spec._info)))
+        return zip(*sorted(qos_spec._info.items()))
 
 
 class DeleteQos(command.Command):
@@ -230,7 +229,7 @@ class ShowQos(command.ShowOne):
             })
         qos_spec._info.update({'specs': utils.format_dict(qos_spec.specs)})
 
-        return zip(*sorted(six.iteritems(qos_spec._info)))
+        return zip(*sorted(qos_spec._info.items()))
 
 
 class UnsetQos(command.Command):

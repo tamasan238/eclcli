@@ -8,7 +8,6 @@ except ImportError:
     from oslo.serialization import jsonutils
 
 from builtins import int
-import six
 
 from . import constants
 from . import exceptions as exception
@@ -45,7 +44,7 @@ class JSONDictSerializer(DictSerializer):
 
     def default(self, data):
         def sanitizer(obj):
-            return six.text_type(obj)
+            return str(obj)
         return jsonutils.dumps(data, default=sanitizer)
 
 
@@ -80,7 +79,7 @@ class XMLDictSerializer(DictSerializer):
                 root_key = constants.VIRTUAL_ROOT_KEY
                 root_value = None
             else:
-                link_keys = [k for k in six.iterkeys(data) or []
+                link_keys = [k for k in data.keys() or []
                              if k.endswith('_links')]
                 if link_keys:
                     links = data.pop(link_keys[0], None)
@@ -177,7 +176,7 @@ class XMLDictSerializer(DictSerializer):
             LOG.debug("Data %(data)s type is %(type)s",
                       {'data': data,
                        'type': type(data)})
-            result.text = six.text_type(data)
+            result.text = str(data)
         return result
 
     def _create_link_nodes(self, xml_doc, links):

@@ -16,7 +16,6 @@
 from eclcli.common import command
 from eclcli.common import utils
 from .. import monitoring_utils
-import six
 import datetime
 
 
@@ -272,4 +271,4 @@ class CreateMeter(command.ShowOne):
             recorded_at=parsed_args.recorded_at,
         )
         info = monitoring_utils._tidy_data_info(data._info)
-        return zip(*sorted(six.iteritems(info)))
+        return zip(*sorted(info.items()))

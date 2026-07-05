@@ -13,7 +13,6 @@
 
 """Configuration action implementations"""
 
-import six
 
 from eclcli.common import command
 
@@ -44,11 +43,11 @@ class ShowConfiguration(command.ShowOne):
     def take_action(self, parsed_args):
 
         info = self.app.client_manager.get_configuration()
-        for key, value in six.iteritems(info.pop('auth', {})):
+        for key, value in (info.pop('auth', {})).items():
             if parsed_args.mask:
                 if 'password' in key.lower():
                     value = REDACTED
                 if 'token' in key.lower():
                     value = REDACTED
             info['auth.' + key] = value
-        return zip(*sorted(six.iteritems(info)))
+        return zip(*sorted(info.items()))

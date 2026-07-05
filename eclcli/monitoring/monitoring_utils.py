@@ -1,5 +1,7 @@
 # Functions used to do the format work
-from six.moves import urllib
+import urllib.parse
+import urllib.request
+import urllib.error
 
 
 def _format_subdict(dict_x, list_it=True):

@@ -29,8 +29,6 @@ except ImportError:
     from oslo.utils import encodeutils, importutils
 
 import prettytable
-import six
-from six.moves import zip
 
 from . import exc
 
@@ -94,10 +92,7 @@ def print_list(objs, fields, field_labels, formatters=None, sortby=0):
                 row.append(data)
         pt.add_row(row)
 
-    if six.PY3:
-        print(encodeutils.safe_encode(pt.get_string(**kwargs)).decode())
-    else:
-        print(encodeutils.safe_encode(pt.get_string(**kwargs)))
+    print(encodeutils.safe_encode(pt.get_string(**kwargs)).decode())
 
 
 def nested_list_of_dict_formatter(field, column_names):
@@ -123,28 +118,27 @@ def format_nested_list_of_dict(l, column_names):
 def print_dict(d, dict_property="Property", wrap=0):
     pt = prettytable.PrettyTable([dict_property, 'Value'], print_empty=False)
     pt.align = 'l'
-    for k, v in sorted(six.iteritems(d)):
+    for k, v in sorted(d.items()):
         # convert dict to str to check length
         if isinstance(v, (list, dict)):
             v = jsonutils.dumps(v)
         # if value has a newline, add in multiple rows
         # e.g. fault with stacktrace
-        if v and isinstance(v, six.string_types) and r'\n' in v:
+        if v and isinstance(v, str) and r'\n' in v:
             lines = v.strip().split(r'\n')
             col1 = k
             for line in lines:
                 if wrap > 0:
-                    line = textwrap.fill(six.text_type(line), wrap)
+                    line = textwrap.fill(str(line), wrap)
                 pt.add_row([col1, line])
                 col1 = ''
         else:
             if wrap > 0:
-                v = textwrap.fill(six.text_type(v), wrap)
+                v = textwrap.fill(str(v), wrap)
             pt.add_row([k, v])
     encoded = encodeutils.safe_encode(pt.get_string())
     # FIXME(gordc): https://bugs.launchpad.net/oslo-incubator/+bug/1370710
-    if six.PY3:
-        encoded = encoded.decode()
+    encoded = encoded.decode()
     print(encoded)
 
 
@@ -201,7 +195,7 @@ def key_with_slash_to_nested_dict(kwargs):
 
 
 def merge_nested_dict(dest, source, depth=0):
-    for (key, value) in six.iteritems(source):
+    for (key, value) in source.items():
         if isinstance(value, dict) and depth:
             merge_nested_dict(dest[key], value,
                               depth=(depth - 1))

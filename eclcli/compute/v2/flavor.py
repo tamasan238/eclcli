@@ -15,7 +15,6 @@
 
 """Flavor action implementations"""
 
-import six
 
 from eclcli.common import command
 from eclcli.common import parseractions
@@ -115,7 +114,7 @@ class CreateFlavor(command.ShowOne):
         flavor = compute_client.flavors.create(*args)._info.copy()
         flavor.pop("links")
 
-        return zip(*sorted(six.iteritems(flavor)))
+        return zip(*sorted(flavor.items()))
 
 
 class DeleteFlavor(command.Command):
@@ -264,7 +263,7 @@ class ShowFlavor(command.ShowOne):
 
         flavor['properties'] = utils.format_dict(resource_flavor.get_keys())
 
-        return zip(*sorted(six.iteritems(flavor)))
+        return zip(*sorted(flavor.items()))
 
 
 class UnsetFlavor(command.Command):

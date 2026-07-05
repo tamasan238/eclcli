@@ -16,16 +16,17 @@
 
 """Compute v2 Security Group action implementations"""
 
-import six
-
-try:
-    from novaclient.v2 import security_group_rules
-except ImportError:
-    from novaclient.v1_1 import security_group_rules
 
 from eclcli.common import command
 from eclcli.common import parseractions
 from eclcli.common import utils
+
+
+class SecurityGroupRule(object):
+    def __init__(self, info):
+        self._info = info
+        for key, value in info.items():
+            setattr(self, key, value)
 
 
 def _xform_security_group_rule(sgroup):
@@ -102,7 +103,7 @@ class CreateSecurityGroup(command.ShowOne):
 
         info = {}
         info.update(data._info)
-        return zip(*sorted(six.iteritems(info)))
+        return zip(*sorted(info.items()))
 
 
 class CreateSecurityGroupRule(command.ShowOne):
@@ -164,7 +165,7 @@ class CreateSecurityGroupRule(command.ShowOne):
         )
 
         info = _xform_security_group_rule(data._info)
-        return zip(*sorted(six.iteritems(info)))
+        return zip(*sorted(info.items()))
 
 
 class ListSecurityGroupRule(command.Lister):
@@ -206,10 +207,7 @@ class ListSecurityGroupRule(command.Lister):
         # Argh, the rules are not Resources...
         rules = []
         for rule in rules_to_list:
-            rules.append(security_group_rules.SecurityGroupRule(
-                compute_client.security_group_rules,
-                _xform_security_group_rule(rule),
-            ))
+            rules.append(SecurityGroupRule(_xform_security_group_rule(rule)))
 
         return (column_headers,
                 (utils.get_item_properties(
@@ -292,4 +290,4 @@ class ShowSecurityGroup(command.ShowOne):
             {'project_id': info.pop('tenant_id')}
         )
 
-        return zip(*sorted(six.iteritems(info)))
+        return zip(*sorted(info.items()))

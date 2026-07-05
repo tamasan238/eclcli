@@ -17,7 +17,7 @@ Flavor interface.
 """
 
 from oslo_utils import strutils
-from six.moves.urllib import parse
+from urllib import parse
 
 from .. import base
 from .. import exceptions

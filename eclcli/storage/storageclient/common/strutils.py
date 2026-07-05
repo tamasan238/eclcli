@@ -3,7 +3,6 @@ import re
 import sys
 import unicodedata
 
-import six
 
 from .gettextutils import _
 
@@ -79,8 +78,8 @@ def bool_from_string(subject, strict=False, default=False):
     ValueError which is useful when parsing values passed in from an API call.
     Strings yielding False are 'f', 'false', 'off', 'n', 'no', or '0'.
     """
-    if not isinstance(subject, six.string_types):
-        subject = six.text_type(subject)
+    if not isinstance(subject, str):
+        subject = str(subject)
 
     lowered = subject.strip().lower()
 
@@ -110,10 +109,10 @@ def safe_decode(text, incoming=None, errors='strict'):
                 representation of it.
     :raises TypeError: If text is not an instance of str
     """
-    if not isinstance(text, (six.string_types, six.binary_type)):
+    if not isinstance(text, (str, bytes)):
         raise TypeError("%s can't be decoded" % type(text))
 
-    if isinstance(text, six.text_type):
+    if isinstance(text, str):
         return text
 
     if not incoming:
@@ -153,14 +152,14 @@ def safe_encode(text, incoming=None,
                 representation of it.
     :raises TypeError: If text is not an instance of str
     """
-    if not isinstance(text, (six.string_types, six.binary_type)):
+    if not isinstance(text, (str, bytes)):
         raise TypeError("%s can't be encoded" % type(text))
 
     if not incoming:
         incoming = (sys.stdin.encoding or
                     sys.getdefaultencoding())
 
-    if isinstance(text, six.text_type):
+    if isinstance(text, str):
         return text.encode(encoding, errors)
     elif text and encoding != incoming:
         # Decode text before encoding it with `encoding`
@@ -261,7 +260,7 @@ def mask_password(message, secret="***"):
     >>> mask_password("u'original_password' :   u'aaaaa'")
     "u'original_password' :   u'***'"
     """
-    message = six.text_type(message)
+    message = str(message)
 
     # NOTE(ldbragst): Check to see if anything in message contains any key
     # specified in _SANITIZE_KEYS, if not then just return the message since

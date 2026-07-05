@@ -15,7 +15,6 @@
 
 from eclcli.common import command
 from .. import monitoring_utils
-import six
 
 
 class ListCapability(command.ShowOne):
@@ -29,4 +28,4 @@ class ListCapability(command.ShowOne):
 
         data = monitoring_client.capabilities.get()
         info = monitoring_utils._tidy_data_info(data._info)
-        return zip(*sorted(six.iteritems(info)))
+        return zip(*sorted(info.items()))

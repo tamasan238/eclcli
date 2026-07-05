@@ -16,7 +16,6 @@
 """Hypervisor action implementations"""
 
 import re
-import six
 
 from eclcli.common import command
 from eclcli.common import utils
@@ -95,7 +94,7 @@ class ShowHypervisor(command.ShowOne):
         # Extract data from uptime value
         # format: 0 up 0,  0 users,  load average: 0, 0, 0
         # example: 17:37:14 up  2:33,  3 users,  load average: 0.33, 0.36, 0.34
-        m = re.match("(.+)\sup\s+(.+),\s+(.+)\susers,\s+load average:\s(.+)",
+        m = re.match(r"(.+)\sup\s+(.+),\s+(.+)\susers,\s+load average:\s(.+)",
                      uptime['uptime'])
         if m:
             hypervisor["host_time"] = m.group(1)
@@ -107,4 +106,4 @@ class ShowHypervisor(command.ShowOne):
         hypervisor["service_host"] = hypervisor["service"]["host"]
         del hypervisor["service"]
 
-        return zip(*sorted(six.iteritems(hypervisor)))
+        return zip(*sorted(hypervisor.items()))

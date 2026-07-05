@@ -13,7 +13,6 @@
 
 """Identity v3 Service Catalog action implementations"""
 
-import six
 
 from eclcli.common import command
 from eclcli.common import utils
@@ -88,4 +87,4 @@ class ShowCatalog(command.ShowOne):
                                parsed_args.service)
             return ([], [])
 
-        return zip(*sorted(six.iteritems(data)))
+        return zip(*sorted(data.items()))

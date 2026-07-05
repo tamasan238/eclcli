@@ -1,8 +1,7 @@
 # -*- encoding: utf-8 -*-
 
 from .. import base
-import six
-from six.moves.urllib import parse
+from urllib import parse
 
 
 def getid(obj):
@@ -29,7 +28,7 @@ class UsageManager(base.BootingManagerWithFind):
 
         qparams = {}
 
-        for opt, val in six.iteritems(search_opts):
+        for opt, val in search_opts.items():
             if val:
                 qparams[opt] = val
 
@@ -51,7 +50,7 @@ class UsageManager(base.BootingManagerWithFind):
         
         qparams = {}
 
-        for opt, val in six.iteritems(search_opts):
+        for opt, val in search_opts.items():
             if val:
                 qparams[opt] = val
 

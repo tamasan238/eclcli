@@ -3,7 +3,6 @@ import ipaddress
 import logging
 import os
 import re
-import six
 import time
 
 try:
@@ -74,7 +73,7 @@ def format_dict(data):
 
     output = ""
     for s in sorted(data):
-        output = output + s + "='" + six.text_type(data[s]) + "', "
+        output = output + s + "='" + str(data[s]) + "', "
     return output[:-2]
 
 
@@ -296,11 +295,8 @@ def build_kwargs_dict(arg_name, value):
 
 def is_ascii(string):
     try:
-        if six.PY2:
-            string.decode('ascii')
-        else:
-            if type(string) != six.text_type:
-                return False
+        if type(string) != str:
+            return False
         return True
     except UnicodeDecodeError:
         return False
@@ -349,8 +345,8 @@ def parse_allocation_pools(text):
 
 def validate_ipv4(text):
     try:
-        if type(text) is not six.text_type:
-            text = six.u(text)
+        if type(text) is not str:
+            text = text
         ipaddress.IPv4Address(text)
     except ipaddress.AddressValueError:
         msg = "%r is not a valid IPv4 address"

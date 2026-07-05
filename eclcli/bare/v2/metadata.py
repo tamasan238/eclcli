@@ -1,4 +1,3 @@
-import six
 
 from eclcli.common import command, utils
 
@@ -23,7 +22,7 @@ class ListMetadata(command.ShowOne):
         if len(data._info) == 0:
             return {}, {}
         else:
-            return zip(*sorted(six.iteritems(data._info)))
+            return zip(*sorted(data._info.items()))
 
 
 class ShowMetadata(command.ShowOne):
@@ -47,7 +46,7 @@ class ShowMetadata(command.ShowOne):
         bare_client = self.app.client_manager.bare
         server_obj = utils.find_resource(bare_client.servers, parsed_args.server)
         data = bare_client.metadata.get(server_obj.id, parsed_args.key)
-        return zip(*sorted(six.iteritems(data._info)))
+        return zip(*sorted(data._info.items()))
 
 
 class UpdateMetadata(command.ShowOne):
@@ -78,7 +77,7 @@ class UpdateMetadata(command.ShowOne):
         body = {'metadata': {}}
         body['metadata'][parsed_args.key] = parsed_args.value
         data = bare_client.metadata.update(server_obj.id, parsed_args.key, body)
-        return zip(*sorted(six.iteritems(data._info)))
+        return zip(*sorted(data._info.items()))
 
 
 class MergeMetadata(command.ShowOne):
@@ -104,7 +103,7 @@ class MergeMetadata(command.ShowOne):
         body = {'metadata': {}}
         body['metadata'] = dict((s.split('=')) for s in parsed_args.metadata.split(","))
         data = bare_client.metadata.merge(server_obj.id, body)
-        return zip(*sorted(six.iteritems(data._info)))
+        return zip(*sorted(data._info.items()))
 
 
 class ReplaceMetadata(command.ShowOne):
@@ -130,7 +129,7 @@ class ReplaceMetadata(command.ShowOne):
         body = {'metadata': {}}
         body['metadata'] = dict((s.split('=')) for s in parsed_args.metadata.split(","))
         data = bare_client.metadata.replace(server_obj.id, body)
-        return zip(*sorted(six.iteritems(data._info)))
+        return zip(*sorted(data._info.items()))
 
 
 class DeleteMetadata(command.ShowOne):

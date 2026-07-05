@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-import six
 
 from eclcli.common import command
 from eclcli.common import utils
@@ -43,4 +42,4 @@ class ShowVersion(command.ShowOne):
     def take_action(self, parsed_args):
         client = self.app.eclsdk.conn.rca
         data = client.get_version()._body
-        return zip(*sorted(six.iteritems(data)))
+        return zip(*sorted(data.items()))

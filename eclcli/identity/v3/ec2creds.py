@@ -12,7 +12,6 @@
 
 """Identity v3 EC2 Credentials action implementations"""
 
-import six
 
 from eclcli.common import command
 from eclcli.common import utils
@@ -106,7 +105,7 @@ class CreateEC2Creds(command.ShowOne):
                 {'project_id': info.pop('tenant_id')}
             )
 
-        return zip(*sorted(six.iteritems(info)))
+        return zip(*sorted(info.items()))
 
 
 class DeleteEC2Creds(command.Command):
@@ -192,4 +191,4 @@ class ShowEC2Creds(command.ShowOne):
                 {'project_id': info.pop('tenant_id')}
             )
 
-        return zip(*sorted(six.iteritems(info)))
+        return zip(*sorted(info.items()))

@@ -6,7 +6,6 @@ import os
 from oslo_utils import encodeutils
 from oslo_utils import importutils
 
-import six
 
 from . import exceptions
 from ..i18n import _
@@ -103,7 +102,7 @@ def http_log_resp(_logger, resp, body):
 
 
 def _safe_encode_without_obj(data):
-    if isinstance(data, six.string_types):
+    if isinstance(data, str):
         return encodeutils.safe_encode(data)
     return data
 

@@ -8,7 +8,6 @@ except ImportError:
 import json_merge_patch as jmp
 import copy
 import re
-import six
 from eclcli.common import command, exceptions, utils
 from eclcli.i18n import _  # noqa
 
@@ -905,7 +904,7 @@ class ShowVirtualNetworkApplianceConsole(command.ShowOne):
         data = vnf_client.get_virtual_network_appliance_console(
             vna, parsed_args.url_type)
 
-        return zip(*sorted(six.iteritems(data)))
+        return zip(*sorted(data.items()))
 
 
 def _set_interfaces_for_display(data):

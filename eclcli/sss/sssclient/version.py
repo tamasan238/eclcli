@@ -1,3 +1,3 @@
-import pbr.version
+import eclcli
 
-__version__ = pbr.version.VersionInfo('python-sssclient').version_string()
+__version__ = eclcli.__version__

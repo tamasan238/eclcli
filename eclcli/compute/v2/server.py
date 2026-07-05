@@ -19,7 +19,6 @@ import argparse
 import getpass
 import io
 import os
-import six
 import sys
 
 from novaclient.v2 import servers
@@ -127,7 +126,7 @@ def _get_ip_address(addresses, address_type, ip_address_family):
     for network in addresses:
         for addy in addresses[network]:
             # Case where it is list of strings
-            if isinstance(addy, six.string_types):
+            if isinstance(addy, str):
                 if new_address_type == 'fixed':
                     return addresses[network][0]
                 else:
@@ -519,7 +518,7 @@ class CreateServer(command.ShowOne):
             # NOTE(vish): multiple copies of the same hint will
             #             result in a list of values
             if key in hints:
-                if isinstance(hints[key], six.string_types):
+                if isinstance(hints[key], str):
                     hints[key] = [hints[key]]
                 hints[key] += [value]
             else:
@@ -582,7 +581,7 @@ class CreateServer(command.ShowOne):
                 raise SystemExit
 
         details = _prep_server_detail(compute_client, server)
-        return zip(*sorted(six.iteritems(details)))
+        return zip(*sorted(details.items()))
 
 
 class CreateServerDump(command.Command):
@@ -670,7 +669,7 @@ class CreateServerImage(command.ShowOne):
             image_id,
         )
 
-        return zip(*sorted(six.iteritems(image._info)))
+        return zip(*sorted(image._info.items()))
 
 
 class DeleteServer(command.Command):
@@ -1160,7 +1159,7 @@ class RebuildServer(command.ShowOne):
                 raise SystemExit
 
         details = _prep_server_detail(compute_client, server)
-        return zip(*sorted(six.iteritems(details)))
+        return zip(*sorted(details.items()))
 
 
 class RemoveServerSecurityGroup(command.Command):
@@ -1250,7 +1249,7 @@ class RescueServer(command.ShowOne):
             compute_client.servers,
             parsed_args.server,
         ).rescue()
-        return zip(*sorted(six.iteritems(body)))
+        return zip(*sorted(body.items()))
 
 
 class ResizeServer(command.Command):
@@ -1448,7 +1447,7 @@ class ShowServer(command.ShowOne):
         else:
             data = _prep_server_detail(compute_client, server)
 
-        return zip(*sorted(six.iteritems(data)))
+        return zip(*sorted(data.items()))
 
 
 class SshServer(command.Command):

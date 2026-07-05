@@ -16,7 +16,6 @@
 
 """Compute v2 Aggregate action implementations"""
 
-import six
 
 from eclcli.common import command
 from eclcli.common import parseractions
@@ -51,7 +50,7 @@ class AddAggregateHost(command.ShowOne):
 
         info = {}
         info.update(data._info)
-        return zip(*sorted(six.iteritems(info)))
+        return zip(*sorted(info.items()))
 
 
 class CreateAggregate(command.ShowOne):
@@ -94,7 +93,7 @@ class CreateAggregate(command.ShowOne):
                 parsed_args.property,
             )._info)
 
-        return zip(*sorted(six.iteritems(info)))
+        return zip(*sorted(info.items()))
 
 
 class DeleteAggregate(command.Command):
@@ -198,7 +197,7 @@ class RemoveAggregateHost(command.ShowOne):
 
         info = {}
         info.update(data._info)
-        return zip(*sorted(six.iteritems(info)))
+        return zip(*sorted(info.items()))
 
 
 class SetAggregate(command.Command):
@@ -289,4 +288,4 @@ class ShowAggregate(command.ShowOne):
 
         info = {}
         info.update(data._info)
-        return zip(*sorted(six.iteritems(info)))
+        return zip(*sorted(info.items()))

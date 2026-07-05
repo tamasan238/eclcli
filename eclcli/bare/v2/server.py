@@ -1,4 +1,3 @@
-import six
 import sys
 
 from eclcli.common import command, exceptions, utils
@@ -61,7 +60,7 @@ def _get_ip_address(addresses, address_type, ip_address_family):
     for network in addresses:
         for addy in addresses[network]:
             # Case where it is list of strings
-            if isinstance(addy, six.string_types):
+            if isinstance(addy, str):
                 if new_address_type == 'fixed':
                     return addresses[network][0]
                 else:

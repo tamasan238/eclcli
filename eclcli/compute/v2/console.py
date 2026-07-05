@@ -15,7 +15,6 @@
 
 """Compute v2 Console action implementations"""
 
-import six
 import sys
 
 from eclcli.common import command
@@ -113,4 +112,4 @@ class ShowConsoleURL(command.ShowOne):
 
         info = {}
         info.update(data['console'])
-        return zip(*sorted(six.iteritems(info)))
+        return zip(*sorted(info.items()))

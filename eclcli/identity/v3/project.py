@@ -15,7 +15,6 @@
 
 """Project action implementations"""
 
-import six
 
 from keystoneauth1 import exceptions as ks_exc
 
@@ -117,7 +116,7 @@ class CreateProject(command.ShowOne):
                 raise e
 
         project._info.pop('links')
-        return zip(*sorted(six.iteritems(project._info)))
+        return zip(*sorted(project._info.items()))
 
 
 class DeleteProject(command.Command):
@@ -340,4 +339,4 @@ class ShowProject(command.ShowOne):
                                         for p in project._info['subtree']]
 
         project._info.pop('links')
-        return zip(*sorted(six.iteritems(project._info)))
+        return zip(*sorted(project._info.items()))

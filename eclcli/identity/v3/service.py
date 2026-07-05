@@ -15,7 +15,6 @@
 
 """Identity v3 Service action implementations"""
 
-import six
 import sys
 
 from eclcli.common import command
@@ -71,7 +70,7 @@ class CreateService(command.ShowOne):
         )
 
         service._info.pop('links')
-        return zip(*sorted(six.iteritems(service._info)))
+        return zip(*sorted(service._info.items()))
 
 
 class DeleteService(command.Command):
@@ -208,4 +207,4 @@ class ShowService(command.ShowOne):
         service = common.find_service(identity_client, parsed_args.service)
 
         service._info.pop('links')
-        return zip(*sorted(six.iteritems(service._info)))
+        return zip(*sorted(service._info.items()))

@@ -15,7 +15,6 @@
 
 """Agent action implementations"""
 
-import six
 
 from eclcli.common import command
 from eclcli.common import utils
@@ -64,7 +63,7 @@ class CreateAgent(command.ShowOne):
             parsed_args.hypervisor
         )
         agent = compute_client.agents.create(*args)._info.copy()
-        return zip(*sorted(six.iteritems(agent)))
+        return zip(*sorted(agent.items()))
 
 
 class DeleteAgent(command.Command):

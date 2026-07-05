@@ -11,7 +11,6 @@
 #    License for the specific language governing permissions and limitations
 #    under the License.
 
-import six
 
 from .. import base
 from . import options
@@ -68,7 +67,7 @@ class StatisticsManager(base.Manager):
         # groupby = groupby or []
         # aggregates = aggregates or []
         # p = ['period=%s' % period] if period else []
-        # if isinstance(groupby, six.string_types):
+        # if isinstance(groupby, str):
         #     groupby = [groupby]
         # p.extend(['groupby=%s' % g for g in groupby] if groupby else [])
         # p.extend(self._build_aggregates(aggregates))

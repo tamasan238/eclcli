@@ -15,7 +15,6 @@
 
 """Identity v3 Credential action implementations"""
 
-import six
 
 from eclcli.common import command
 from eclcli.common import utils
@@ -66,7 +65,7 @@ class CreateCredential(command.ShowOne):
             project=project)
 
         credential._info.pop('links')
-        return zip(*sorted(six.iteritems(credential._info)))
+        return zip(*sorted(credential._info.items()))
 
 
 class DeleteCredential(command.Command):
@@ -173,4 +172,4 @@ class ShowCredential(command.ShowOne):
                                          parsed_args.credential)
 
         credential._info.pop('links')
-        return zip(*sorted(six.iteritems(credential._info)))
+        return zip(*sorted(credential._info.items()))

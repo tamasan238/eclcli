@@ -16,7 +16,7 @@
 import logging
 
 from oslo_config import cfg
-from six.moves.urllib import parse as urlparse
+from urllib import parse as urlparse
 
 from keystoneclient.auth.identity.generic import password as ksc_password
 from keystoneclient.auth import token_endpoint

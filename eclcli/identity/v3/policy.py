@@ -15,7 +15,6 @@
 
 """Identity v3 Policy action implementations"""
 
-import six
 import sys
 
 from eclcli.common import command
@@ -51,7 +50,7 @@ class CreatePolicy(command.ShowOne):
 
         policy._info.pop('links')
         policy._info.update({'rules': policy._info.pop('blob')})
-        return zip(*sorted(six.iteritems(policy._info)))
+        return zip(*sorted(policy._info.items()))
 
 
 class DeletePolicy(command.Command):
@@ -159,4 +158,4 @@ class ShowPolicy(command.ShowOne):
 
         policy._info.pop('links')
         policy._info.update({'rules': policy._info.pop('blob')})
-        return zip(*sorted(six.iteritems(policy._info)))
+        return zip(*sorted(policy._info.items()))

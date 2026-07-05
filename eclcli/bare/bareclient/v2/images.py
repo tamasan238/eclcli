@@ -16,7 +16,7 @@
 Image interface.
 """
 
-from six.moves.urllib import parse
+from urllib import parse
 
 from .. import base
 

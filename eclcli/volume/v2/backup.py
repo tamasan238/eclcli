@@ -16,7 +16,6 @@
 
 import copy
 
-import six
 
 from eclcli.common import command
 from eclcli.common import utils
@@ -61,7 +60,7 @@ class CreateBackup(command.ShowOne):
             description=parsed_args.description
         )
         backup._info.pop("links", None)
-        return zip(*sorted(six.iteritems(backup._info)))
+        return zip(*sorted(backup._info.items()))
 
 
 class DeleteBackup(command.Command):
@@ -180,4 +179,4 @@ class ShowBackup(command.ShowOne):
         backup = utils.find_resource(volume_client.backups,
                                      parsed_args.backup)
         backup._info.pop("links", None)
-        return zip(*sorted(six.iteritems(backup._info)))
+        return zip(*sorted(backup._info.items()))

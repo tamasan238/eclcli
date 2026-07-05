@@ -25,7 +25,6 @@ try:
 except ImportError:
     from oslo.utils import encodeutils
 
-import six
 
 from . import __init__
 from . import client as monitoringclient
@@ -299,7 +298,7 @@ def main(args=None):
         if '--debug' in args or '-d' in args:
             raise
         else:
-            print(encodeutils.safe_encode(six.text_type(e)), file=sys.stderr)
+            print(encodeutils.safe_encode(str(e)), file=sys.stderr)
         sys.exit(1)
     except KeyboardInterrupt:
         print("Stopping Ceilometer Client", file=sys.stderr)

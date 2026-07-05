@@ -1,6 +1,5 @@
 import copy
 
-import six
 
 from eclcli.common import command
 from eclcli.common import utils
@@ -68,7 +67,7 @@ class ShowStorage(command.ShowOne):
             printout = {"message": clientexp.message,
                         "details": clientexp.details,
                         "code": clientexp.code}
-        return zip(*sorted(six.iteritems(printout)))
+        return zip(*sorted(printout.items()))
 
 
 class CreateStorage(command.ShowOne):
@@ -135,7 +134,7 @@ class CreateStorage(command.ShowOne):
             printout = {"message": clientexp.message,
                         "details": clientexp.details,
                         "code": clientexp.code}
-        return zip(*sorted(six.iteritems(printout)))
+        return zip(*sorted(printout.items()))
 
 
 class UpdateStorage(command.ShowOne):
@@ -196,7 +195,7 @@ class UpdateStorage(command.ShowOne):
             printout = {"message": clientexp.message,
                         "details": clientexp.details,
                         "code": clientexp.code}
-        return zip(*sorted(six.iteritems(printout)))
+        return zip(*sorted(printout.items()))
 
 
 class DeleteStorage(command.ShowOne):
@@ -229,4 +228,4 @@ class DeleteStorage(command.ShowOne):
                                 "details": clientexp.details,
                                 "code": clientexp.code}
 
-        return zip(*sorted(six.iteritems(printout)))
+        return zip(*sorted(printout.items()))

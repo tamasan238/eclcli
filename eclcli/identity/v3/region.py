@@ -13,7 +13,6 @@
 
 """Identity v3 Region action implementations"""
 
-import six
 
 from eclcli.common import command
 from eclcli.common import utils
@@ -56,7 +55,7 @@ class CreateRegion(command.ShowOne):
         region._info['region'] = region._info.pop('id')
         region._info['parent_region'] = region._info.pop('parent_region_id')
         region._info.pop('links', None)
-        return zip(*sorted(six.iteritems(region._info)))
+        return zip(*sorted(region._info.items()))
 
 
 class DeleteRegion(command.Command):
@@ -164,4 +163,4 @@ class ShowRegion(command.ShowOne):
         region._info['region'] = region._info.pop('id')
         region._info['parent_region'] = region._info.pop('parent_region_id')
         region._info.pop('links', None)
-        return zip(*sorted(six.iteritems(region._info)))
+        return zip(*sorted(region._info.items()))

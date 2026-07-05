@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import copy
-import six
 from eclcli.common import command
 from eclcli.common import utils
 from eclcli.i18n import _  # noqa
@@ -62,7 +61,7 @@ class ShowICCNetwork(command.ShowOne):
         data = client.get_icc_network(
             parsed_args.tenant_connection_request_id)._body
 
-        return zip(*sorted(six.iteritems(data)))
+        return zip(*sorted(data.items()))
 
 
 class ListICCSubnet(command.Lister):
@@ -127,4 +126,4 @@ class ShowICCSubnet(command.ShowOne):
             parsed_args.subnet_id
         )._body
 
-        return zip(*sorted(six.iteritems(data)))
+        return zip(*sorted(data.items()))

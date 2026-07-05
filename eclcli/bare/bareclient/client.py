@@ -17,7 +17,7 @@ try:
 except ImportError:
     import simplejson as json
 
-from six.moves.urllib import parse
+from urllib import parse
 
 from . import exceptions
 from . import service_catalog

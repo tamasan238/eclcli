@@ -25,7 +25,7 @@ try:
 except ImportError:
     import simplejson as json
 
-from six.moves.urllib import parse
+from urllib import parse
 
 from . import exceptions
 from .i18n import _

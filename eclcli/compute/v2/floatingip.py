@@ -15,7 +15,6 @@
 
 """Floating IP action implementations"""
 
-import six
 
 from eclcli.common import command
 from eclcli.common import utils
@@ -65,7 +64,7 @@ class CreateFloatingIP(command.ShowOne):
 
         info = {}
         info.update(floating_ip._info)
-        return zip(*sorted(six.iteritems(info)))
+        return zip(*sorted(info.items()))
 
 
 class RemoveFloatingIP(command.Command):

@@ -1,8 +1,7 @@
-import six
 try:
     from urllib import urlencode
 except ImportError:
-    from six.moves.urllib.parse import urlencode
+    from urllib.parse import urlencode
 
 from .. import base
 
@@ -70,7 +69,7 @@ class VirtualStorageManager(base.ManagerWithFind):
         if not sort:
             return None
 
-        if isinstance(sort, six.string_types):
+        if isinstance(sort, str):
             # Convert the string into a list for consistent validation
             sort = [s for s in sort.split(',') if s]
 
@@ -119,7 +118,7 @@ class VirtualStorageManager(base.ManagerWithFind):
 
         qparams = {}
 
-        for opt, val in six.iteritems(search_opts):
+        for opt, val in search_opts.items():
             if val:
                 qparams[opt] = val
 

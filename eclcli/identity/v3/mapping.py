@@ -17,7 +17,6 @@
 
 import json
 
-import six
 
 from eclcli.common import command
 from eclcli.common import exceptions
@@ -102,7 +101,7 @@ class CreateMapping(command.ShowOne, _RulesReader):
             rules=rules)
 
         mapping._info.pop('links', None)
-        return zip(*sorted(six.iteritems(mapping._info)))
+        return zip(*sorted(mapping._info.items()))
 
 
 class DeleteMapping(command.Command):
@@ -168,7 +167,7 @@ class SetMapping(command.Command, _RulesReader):
             rules=rules)
 
         mapping._info.pop('links', None)
-        return zip(*sorted(six.iteritems(mapping._info)))
+        return zip(*sorted(mapping._info.items()))
 
 
 class ShowMapping(command.ShowOne):
@@ -189,4 +188,4 @@ class ShowMapping(command.ShowOne):
         mapping = identity_client.federation.mappings.get(parsed_args.mapping)
 
         mapping._info.pop('links', None)
-        return zip(*sorted(six.iteritems(mapping._info)))
+        return zip(*sorted(mapping._info.items()))

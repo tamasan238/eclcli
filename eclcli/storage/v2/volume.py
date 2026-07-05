@@ -1,6 +1,5 @@
 import copy
 
-import six
 
 from eclcli.common import command
 from eclcli.common import utils
@@ -74,7 +73,7 @@ class ShowVolume(command.ShowOne):
             printout = {"message": clientexp.message,
                         "details": clientexp.details,
                         "code": clientexp.code}
-        return zip(*sorted(six.iteritems(printout)))
+        return zip(*sorted(printout.items()))
 
 
 class CreateVolume(command.ShowOne):
@@ -150,7 +149,7 @@ class CreateVolume(command.ShowOne):
             printout = {"message": clientexp.message,
                         "details": clientexp.details,
                         "code": clientexp.code}
-        return zip(*sorted(six.iteritems(printout)))
+        return zip(*sorted(printout.items()))
 
 
 class UpdateVolume(command.ShowOne):
@@ -196,7 +195,7 @@ class UpdateVolume(command.ShowOne):
             printout = {"message": clientexp.message,
                         "details": clientexp.details,
                         "code": clientexp.code}
-        return zip(*sorted(six.iteritems(printout)))
+        return zip(*sorted(printout.items()))
 
 
 class DeleteVolume(command.ShowOne):
@@ -226,5 +225,5 @@ class DeleteVolume(command.ShowOne):
                 printout[vol] = {"status code": clientexp.code,
                                  "api_error_message": clientexp.message,
                                  "details": clientexp.details}
-        return zip(*sorted(six.iteritems(printout)))
+        return zip(*sorted(printout.items()))
 

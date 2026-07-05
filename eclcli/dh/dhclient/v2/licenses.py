@@ -1,12 +1,11 @@
 # -*- encoding: utf-8 -*-
 
 from .. import base
-import six
 
 try:
     from urllib import urlencode
 except ImportError:
-    from six.moves.urllib.parse import urlencode
+    from urllib.parse import urlencode
 
 
 def getid(obj):
@@ -39,7 +38,7 @@ class LicenseManager(base.BootingManagerWithFind):
 
         qparams = {}
 
-        for opt, val in six.iteritems(search_opts):
+        for opt, val in search_opts.items():
             if val:
                 qparams[opt] = val
 

@@ -15,7 +15,6 @@
 
 """Identity v2.0 User action implementations"""
 
-import six
 
 from keystoneauth1 import exceptions as ks_exc
 
@@ -118,7 +117,7 @@ class CreateUser(command.ShowOne):
 
         info = {}
         info.update(user._info)
-        return zip(*sorted(six.iteritems(info)))
+        return zip(*sorted(info.items()))
 
 
 class DeleteUser(command.Command):
@@ -381,4 +380,4 @@ class ShowUser(command.ShowOne):
                 {'project_id': info.pop('tenant_id')}
             )
 
-        return zip(*sorted(six.iteritems(info)))
+        return zip(*sorted(info.items()))

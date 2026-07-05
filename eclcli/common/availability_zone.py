@@ -16,7 +16,6 @@
 import copy
 
 from novaclient import exceptions as nova_exceptions
-import six
 
 from eclcli.common import command
 from eclcli.common import utils
@@ -43,11 +42,11 @@ def _xform_compute_availability_zone(az, include_extra):
         return result
 
     if hasattr(az, 'hosts') and az.hosts:
-        for host, services in six.iteritems(az.hosts):
+        for host, services in az.hosts.items():
             host_info = copy.deepcopy(zone_info)
             host_info['host_name'] = host
 
-            for svc, state in six.iteritems(services):
+            for svc, state in services.items():
                 info = copy.deepcopy(host_info)
                 info['service_name'] = svc
                 info['service_status'] = '%s %s %s' % (

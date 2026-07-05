@@ -16,7 +16,6 @@
 """Quota action implementations"""
 
 import itertools
-import six
 import sys
 
 from eclcli.common import command
@@ -235,4 +234,4 @@ class ShowQuota(command.ShowOne):
         if 'id' in info:
             info['project'] = info.pop('id')
 
-        return zip(*sorted(six.iteritems(info)))
+        return zip(*sorted(info.items()))

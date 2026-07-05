@@ -15,7 +15,6 @@
 
 """Module action implementation"""
 
-import six
 import sys
 
 from eclcli.common import command
@@ -68,4 +67,4 @@ class ListModule(command.ShowOne):
                     # aw, just skip it
                     pass
 
-        return zip(*sorted(six.iteritems(data)))
+        return zip(*sorted(data.items()))

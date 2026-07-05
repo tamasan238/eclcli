@@ -1,5 +1,7 @@
 from .. import base
-from six.moves import urllib
+import urllib.parse
+import urllib.request
+import urllib.error
 
 
 class Version(base.Resource):

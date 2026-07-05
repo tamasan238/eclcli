@@ -16,7 +16,6 @@
 """Image V2 Action Implementations"""
 
 import argparse
-import six
 
 from glanceclient.common import utils as gc_utils
 
@@ -45,7 +44,7 @@ def _format_image(image):
                       'min_disk', 'protected', 'id', 'file', 'checksum',
                       'owner', 'virtual_size', 'min_ram', 'schema']
     # split out the usual key and the properties which are top-level
-    for key in six.iterkeys(image):
+    for key in image.keys():
         if key in fields_to_show:
             info[key] = image.get(key)
         elif key == 'tags':
@@ -93,7 +92,7 @@ class CopyImage(command.ShowOne):
             tenant_id,
         )
 
-        return zip(*sorted(six.iteritems(image)))
+        return zip(*sorted(image.items()))
 
 
 class CancelCopyImage(command.ShowOne):
@@ -114,7 +113,7 @@ class CancelCopyImage(command.ShowOne):
         image_client.extension.cancel_copy(job_id)
         image = image_client.extension.detail(job_id)
 
-        return zip(*sorted(six.iteritems(image)))
+        return zip(*sorted(image.items()))
 
 
 class ListCopyImage(command.Lister):
@@ -160,7 +159,7 @@ class ShowCopyImage(command.ShowOne):
 
         image = image_client.extension.detail(job_id)
 
-        return zip(*sorted(six.iteritems(image)))
+        return zip(*sorted(image.items()))
 
 
 class UpdateImageMember(command.ShowOne):
@@ -203,7 +202,7 @@ class UpdateImageMember(command.ShowOne):
             status,
         )
 
-        return zip(*sorted(six.iteritems(image_member)))
+        return zip(*sorted(image_member.items()))
 
 
 class AddProjectToImage(command.ShowOne):
@@ -243,7 +242,7 @@ class AddProjectToImage(command.ShowOne):
             project_id,
         )
 
-        return zip(*sorted(six.iteritems(image_member)))
+        return zip(*sorted(image_member.items()))
 
 
 class CreateImage(command.ShowOne):
@@ -407,7 +406,7 @@ class CreateImage(command.ShowOne):
 
         # properties should get flattened into the general kwargs
         if getattr(parsed_args, 'properties', None):
-            for k, v in six.iteritems(parsed_args.properties):
+            for k, v in parsed_args.properties.items():
                 kwargs[k] = str(v)
 
         # Handle exclusive booleans with care
@@ -504,7 +503,7 @@ class CreateImage(command.ShowOne):
         if not info:
             info = _format_image(image)
 
-        return zip(*sorted(six.iteritems(info)))
+        return zip(*sorted(info.items()))
 
 
 class DeleteImage(command.Command):
@@ -922,7 +921,7 @@ class SetImage(command.Command):
 
         # Properties should get flattened into the general kwargs
         if getattr(parsed_args, 'properties', None):
-            for k, v in six.iteritems(parsed_args.properties):
+            for k, v in parsed_args.properties.items():
                 kwargs[k] = str(v)
 
         # Handle exclusive booleans with care
@@ -1006,4 +1005,4 @@ class ShowImage(command.ShowOne):
             parsed_args.image,
         )
         info = _format_image(image)
-        return zip(*sorted(six.iteritems(info)))
+        return zip(*sorted(info.items()))

@@ -3,7 +3,6 @@ import contextlib
 import hashlib
 import os
 
-import six
 
 from . import exceptions
 from . import utils
@@ -177,7 +176,7 @@ class Manager(utils.HookableMixin):
         return body
 
 
-class ManagerWithFind(six.with_metaclass(abc.ABCMeta, Manager)):
+class ManagerWithFind(Manager, metaclass=abc.ABCMeta):
     """
     Like a `Manager`, but with additional `find()`/`findall()` methods.
     """

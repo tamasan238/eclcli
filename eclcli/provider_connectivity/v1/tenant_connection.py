@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import copy
-import six
 from eclcli.common import command
 from eclcli.common import utils
 from eclcli.i18n import _  # noqa
@@ -63,7 +62,7 @@ class ShowTenantConnection(command.ShowOne):
         if 'tags_other' in data:
             data['tags_other'] = utils.format_dict(data.pop('tags_other'))
 
-        return zip(*sorted(six.iteritems(data)))
+        return zip(*sorted(data.items()))
 
 
 class CreateTenantConnection(command.ShowOne):
@@ -184,7 +183,7 @@ class CreateTenantConnection(command.ShowOne):
         if 'tags_other' in data:
             data['tags_other'] = utils.format_dict(data.pop('tags_other'))
 
-        return zip(*sorted(six.iteritems(data)))
+        return zip(*sorted(data.items()))
 
 
 class UpdateTenantConnection(command.ShowOne):
@@ -274,7 +273,7 @@ class UpdateTenantConnection(command.ShowOne):
         if 'tags_other' in data:
             data['tags_other'] = utils.format_dict(data.pop('tags_other'))
 
-        return zip(*sorted(six.iteritems(data)))
+        return zip(*sorted(data.items()))
 
 
 class DeleteTenantConnection(command.Command):
