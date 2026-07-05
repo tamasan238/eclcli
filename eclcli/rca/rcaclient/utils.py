@@ -26,8 +26,9 @@ try:
 except ImportError:
     from oslo.utils import encodeutils
 
-import pkg_resources
 import prettytable
+
+from eclcli.common import entrypoints
 
 from . import exceptions
 from .i18n import _
@@ -319,10 +320,10 @@ def do_action_on_many(action, resources, success_msg, error_msg):
 
 def _load_entry_point(ep_name, name=None):
     """Try to load the entry point ep_name that matches name."""
-    for ep in pkg_resources.iter_entry_points(ep_name, name=name):
+    for ep in entrypoints.iter_entry_points(ep_name, name=name):
         try:
             return ep.load()
-        except (ImportError, pkg_resources.UnknownExtra, AttributeError):
+        except (ImportError, entrypoints.UnknownExtra, AttributeError):
             continue
 
 

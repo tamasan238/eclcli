@@ -1,7 +1,6 @@
 import logging
 
-import pkg_resources
-
+from eclcli.common import entrypoints
 from . import exceptions
 from . import utils
 
@@ -18,10 +17,10 @@ def discover_auth_systems():
     This won't take into account the old style auth-systems.
     """
     ep_name = 'openstack.client.auth_plugin'
-    for ep in pkg_resources.iter_entry_points(ep_name):
+    for ep in entrypoints.iter_entry_points(ep_name):
         try:
             auth_plugin = ep.load()
-        except (ImportError, pkg_resources.UnknownExtra, AttributeError) as e:
+        except (ImportError, entrypoints.UnknownExtra, AttributeError) as e:
             logger.debug("ERROR: Cannot load auth plugin %s" % ep.name)
             logger.debug(e, exc_info=1)
         else:
